@@ -120,3 +120,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
+
+
+# Custom User
+
+AUTH_USER_MODEL = 'course_rater_app.User'
+
