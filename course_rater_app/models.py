@@ -57,6 +57,6 @@ class User(AbstractUser):
                      ('ot', "Other") ]
 
     email = models.EmailField(unique=True)
-    year = models.CharField(max_length=2, choices=GRADE_CHOICES, default='na')
+    year = models.CharField(max_length=2, choices=GRADE_CHOICES, default='B1')
 
 
