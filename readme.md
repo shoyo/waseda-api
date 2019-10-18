@@ -16,7 +16,7 @@
 
 `/courses/<int:pk>` and `/labs/<int:pk>`
 * `GET`: show course or lab
-* `PUT`: update course or lab **[must be admin**
+* `PUT`: update course or lab **[must be admin]**
 * `DELETE`: delete course or lab **[must be admin]**
 
 `/courses/<int:pk>/reviews` and `/labs/<int:pk>/reviews`
