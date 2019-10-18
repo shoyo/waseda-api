@@ -64,11 +64,6 @@ class LabReviewSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    lab_reviews = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name='lab-review-detail',
-    )
 
     class Meta:
         model = User
@@ -78,8 +73,7 @@ class UserSerializer(serializers.ModelSerializer):
                   'last_name',
                   'email',
                   'year',
-                  'password',
-                  'lab_reviews',]
+                  'password',]
 
     def create(self, validated_data):
         user = super(UserSerializer, self).create(validated_data)
