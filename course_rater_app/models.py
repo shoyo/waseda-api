@@ -53,7 +53,8 @@ class User(AbstractUser):
                      ('M1', "Master's 1"),
                      ('M2', "Master's 2"),
                      ('D', "PhD"),
-                     ('na', "Other")]
+                     ('gr', "Graduated"),
+                     ('ot', "Other") ]
 
     email = models.EmailField(unique=True)
     year = models.CharField(max_length=2, choices=GRADE_CHOICES, default='na')

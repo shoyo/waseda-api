@@ -1,9 +1,10 @@
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from course_rater_app.models import Course, CourseReview, Lab, LabReview, User
-from course_rater_app.permissions import IsOwnerOrReadOnly
+from course_rater_app.permissions import IsReviewerOrReadOnly
 from course_rater_app.serializers import (CourseSerializer, CourseReviewSerializer,
                                           LabSerializer, LabReviewSerializer, UserSerializer)
 
@@ -37,17 +38,18 @@ class CourseReviewList(generics.ListCreateAPIView):
     queryset = CourseReview.objects.all()
     serializer_class = CourseReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+                          IsReviewerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(reviewer=self.request.user)
+        serializer.save(reviewer=self.request.user,
+                        course=Course.objects.get(id=self.kwargs['pk']))
 
 
 class CourseReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = CourseReview.objects.all()
     serializer_class = CourseReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+                          IsReviewerOrReadOnly]
 
 
 # Labs
@@ -68,17 +70,18 @@ class LabReviewList(generics.ListCreateAPIView):
     queryset = LabReview.objects.all()
     serializer_class = LabReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+                          IsReviewerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(reviewer=self.request.user)
+        serializer.save(reviewer=self.request.user,
+                        lab=Lab.objects.get(id=self.kwargs['pk']))
 
 
 class LabReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = LabReview.objects.all()
     serializer_class = LabReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+                          IsReviewerOrReadOnly]
 
 
 # Users
@@ -86,6 +89,7 @@ class LabReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):

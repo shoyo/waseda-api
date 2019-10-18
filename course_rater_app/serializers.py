@@ -9,17 +9,27 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class CourseReviewSerializer(serializers.ModelSerializer):
-    reviewer = serializers.ReadOnlyField(source='reviewer.username')
-    course = serializers.HyperlinkedIdentityField(view_name='course-detail', read_only=True)
+    course_url = serializers.HyperlinkedRelatedField(
+        view_name='course-detail',
+        lookup_url_kwarg='pk',
+        read_only=True,
+        source='course',
+    )
+    reviewer_url = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        lookup_url_kwarg='pk',
+        read_only=True,
+        source='reviewer',
+    )
 
     class Meta:
         model = CourseReview
         fields = ['id',
-                  'course',
-                  'reviewer',
                   'overall_rating',
                   'text',
-                  'anonymous']
+                  'anonymous',
+                  'course_url',
+                  'reviewer_url',]
 
 
 class LabSerializer(serializers.ModelSerializer):
@@ -29,20 +39,37 @@ class LabSerializer(serializers.ModelSerializer):
 
 
 class LabReviewSerializer(serializers.ModelSerializer):
-    reviewer = serializers.ReadOnlyField(source='reviewer.username')
-    course = serializers.HyperlinkedIdentityField(view_name='lab-detail', read_only=True)
+    lab_url = serializers.HyperlinkedRelatedField(
+        view_name='lab-detail',
+        lookup_url_kwarg='pk',
+        read_only=True,
+        source='lab',
+    )
+    reviewer_url = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        lookup_url_kwarg='pk',
+        read_only=True,
+        source='reviewer',
+    )
 
     class Meta:
         model = LabReview
         fields = ['id',
-                  'lab',
-                  'reviewer',
                   'overall_rating',
                   'text',
-                  'anonymous']
+                  'anonymous',
+                  'lab_url',
+                  'reviewer_url',]
 
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    lab_reviews = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='lab-review-detail',
+    )
+
     class Meta:
         model = User
         fields = ['id',
@@ -50,4 +77,13 @@ class UserSerializer(serializers.ModelSerializer):
                   'first_name',
                   'last_name',
                   'email',
-                  'year']
+                  'year',
+                  'password',
+                  'lab_reviews',]
+
+    def create(self, validated_data):
+        user = super(UserSerializer, self).create(validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
