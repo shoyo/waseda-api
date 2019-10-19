@@ -26,3 +26,4 @@
 `/courses/<int:course_id>/reviews/<int:review_id>` and `/labs/<int:lab_id>/reviews/<int:review_id>`
 * `GET`: show course review or lab review
 * `PUT`: update course review or lab review **[must be admin]**
+* `DELETE`: delete course review or lab review **[must be admin]**

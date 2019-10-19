@@ -82,7 +82,7 @@ class LabReviewList(generics.ListCreateAPIView):
                         lab=Lab.objects.get(id=self.kwargs['pk']))
 
 
-class LabReviewDetail(generics.RetrieveUpdateAPIView):
+class LabReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = LabReview.objects.all()
     serializer_class = LabReviewSerializer
     permission_classes = [IsAdminOrReadOnly]
