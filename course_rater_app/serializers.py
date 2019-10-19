@@ -17,7 +17,8 @@ class CourseReviewSerializer(serializers.ModelSerializer):
     )
     reviewer_url = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
-        lookup_url_kwarg='pk',
+        lookup_field='username',
+        lookup_url_kwarg='username',
         read_only=True,
         source='reviewer',
     )
@@ -47,7 +48,8 @@ class LabReviewSerializer(serializers.ModelSerializer):
     )
     reviewer_url = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
-        lookup_url_kwarg='pk',
+        lookup_field='username',
+        lookup_url_kwarg='username',
         read_only=True,
         source='reviewer',
     )
