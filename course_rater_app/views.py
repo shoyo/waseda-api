@@ -3,9 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from course_rater_app.models import Course, CourseReview, Lab, LabReview, User
-from course_rater_app.permissions import (IsAdminOrReadOnly,
-                                          IsReviewerOrAdminOrReadOnly,
-                                          IsSelfOrAdminOrReadOnly)
+from course_rater_app.permissions import IsAdminOrReadOnly
 from course_rater_app.serializers import (CourseSerializer,
                                           CourseReviewSerializer,
                                           LabSerializer,
