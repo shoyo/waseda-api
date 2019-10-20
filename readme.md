@@ -10,7 +10,7 @@ Note: Python 3.6 is preferred since that's the version that's running on the EC2
 
   Update your terminal with this change by running `$ source ~/.bash_profile` or starting a new terminal.
 * Run database migrations with `$ python manage.py migrate`.
-* Run `$ python manage.py runserver` and open `http://localhost:8000`
+* Run `$ python manage.py runserver` and open `http://localhost:8000`.
 
 ## Development
 During development, run the environment locally and make requests to `http://localhost:8000/`.
