@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'course_rater_app.User'
 
 
-# Pagination
+# Rest Framework
 
 if os.environ['ENVIRONMENT'] == 'development':
     REST_FRAMEWORK = {

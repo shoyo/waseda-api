@@ -39,8 +39,6 @@ urlpatterns = [
          name='user-detail'),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
-
 if os.environ['ENVIRONMENT'] == 'development':
     urlpatterns += [
         path('api-auth/', include('rest_framework.urls')),
