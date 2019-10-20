@@ -1,5 +1,23 @@
 # Rate My Waseda API
 
+## Setting Up
+Note: Python 3.6 is preferred since that's the version that's running on the EC2 instance, but 3.6+ should be fine.
+* Clone this repo.
+* Create a python virtual environment and run `$ pip install -r requirements.txt` to install dependencies.
+* Add the following line to your `~/.bash_profile`.
+
+      export ENVIRONMENT="development"
+
+  Update your terminal with this change by running `$ source ~/.bash_profile` or starting a new terminal.
+* Run database migrations with `$ python manage.py migrate`.
+* Run `$ python manage.py runserver` and open `http://localhost:8000`
+
+## Development
+During development, run the environment locally and make requests to `http://localhost:8000/`.
+
+## Production
+To test endpoints in production, make requests to `http://rate-my-waseda-api.bcmmgfwg4g.ap-northeast-1.elasticbeanstalk.com/`.
+
 ## Endpoints
 `/users`
 * `GET`: show all users
@@ -27,3 +45,10 @@
 * `GET`: show course review or lab review
 * `PUT`: update course review or lab review **[must be admin]**
 * `DELETE`: delete course review or lab review **[must be admin]**
+
+## Examples
+### cURL
+To be added
+
+### Javascript
+To be added
