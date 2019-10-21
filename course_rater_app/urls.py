@@ -37,9 +37,6 @@ urlpatterns = [
     path('users/<slug:username>/',
          views.UserDetail.as_view(),
          name='user-detail'),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
-if os.environ['ENVIRONMENT'] == 'development':
-    urlpatterns += [
-        path('api-auth/', include('rest_framework.urls')),
-    ]
