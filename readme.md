@@ -19,37 +19,37 @@ During development, run the environment locally and make requests to `http://loc
 To test endpoints in production, make requests to `https://api.ratemywaseda.com/`.
 
 ## Endpoints
-`/users`
+`users/`
 * `GET`: show all users
 * `POST`: create new user
 
-`/users/<slug:username>`
+`users/<slug:username>/`
 * `GET`: show user
 * `PUT`: update user **[must provide admin credentials]**
 * `DELETE`: delete user **[must provide admin credentials]**
 
-`/courses` and `/labs`
+`courses/` and `labs/`
 * `GET`: show all courses or labs
 * `POST`: create new course or lab **[must provide admin credentials]**
 
-`/courses/<int:pk>` and `/labs/<int:pk>`
+`courses/<int:pk>/` and `labs/<int:pk>/`
 * `GET`: show course or lab
 * `PUT`: update course or lab **[must provide admin credentials]**
 * `DELETE`: delete course or lab **[must provide admin crendentials]**
 
-`/courses/<int:pk>/reviews` and `/labs/<int:pk>/reviews`
+`courses/<int:pk>/reviews/` and `labs/<int:pk>/reviews/`
 * `GET`: show all course reviews or lab reviews
 * `POST`: create new course review or lab review **[must provide user credentials]**
 
-`/courses/<int:course_id>/reviews/<int:review_id>` and `/labs/<int:lab_id>/reviews/<int:review_id>`
+`courses/<int:course_id>/reviews/<int:review_id>/` and `labs/<int:lab_id>/reviews/<int:review_id>/`
 * `GET`: show course review or lab review
 * `PUT`: update course review or lab review **[must provide admin credentials]**
 * `DELETE`: delete course review or lab review **[must provide admin credentials]**
 
 ## Examples
 ### cURL
-* `$ curl -X GET https://api.ratemywaseda.com/courses`
-* `$ curl -X POST -u username:password -d "param1=value1&param2=value2&param3=value3" https://api.ratemywaseda.com/labs`
+* `$ curl -X GET https://api.ratemywaseda.com/courses/`
+* `$ curl -X POST -u username:password -d "param1=value1&param2=value2&param3=value3" https://api.ratemywaseda.com/labs/`
 
 ### Javascript
 To be added
