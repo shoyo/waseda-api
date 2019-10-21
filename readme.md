@@ -16,7 +16,7 @@ Note: Python 3.6 is preferred since that's the version that's running on the EC2
 During development, run the environment locally and make requests to `http://localhost:8000/`.
 
 ## Production
-To test endpoints in production, make requests to `http://rate-my-waseda-api.bcmmgfwg4g.ap-northeast-1.elasticbeanstalk.com/`.
+To test endpoints in production, make requests to `https://api.ratemywaseda.com/`.
 
 ## Endpoints
 `/users`
@@ -48,7 +48,8 @@ To test endpoints in production, make requests to `http://rate-my-waseda-api.bcm
 
 ## Examples
 ### cURL
-To be added
+* `$ curl -X GET https://api.ratemywaseda.com/courses`
+* `$ curl -X POST -u username:password -d "param1=value1&param2=value2&param3=value3" https://api.ratemywaseda.com/labs`
 
 ### Javascript
 To be added
