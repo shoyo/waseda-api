@@ -5,8 +5,27 @@ from rest_framework import serializers
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ['id', 'name', 'professor']
-
+        fields = [
+            'title'
+            'instructor'
+            'credits'
+            'level'
+            'category'
+            'school'
+            'campus'
+            'main_language'
+            'eligible_year'
+            'course_code'
+            'course_class_code'
+            'syllabus_url'
+            'first_academic_discipline'
+            'second_academic_discipline'
+            'third_academic_discipline'
+            'classroom'
+            'year'
+            'term_day_period'
+        ]
+    
 
 class CourseReviewSerializer(serializers.ModelSerializer):
     course_url = serializers.HyperlinkedRelatedField(
