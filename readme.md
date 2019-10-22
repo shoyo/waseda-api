@@ -49,7 +49,8 @@ To test endpoints in production, make requests to `https://api.ratemywaseda.com/
 ## Examples
 ### cURL
 * `$ curl -X GET https://api.ratemywaseda.com/courses/`
-* `$ curl -X POST -u username:password -d "param1=value1&param2=value2&param3=value3" https://api.ratemywaseda.com/labs/`
+* `$ curl -X POST -u username:password -d "param1=value1&param2=value2" https://api.ratemywaseda.com/courses/`
+* `$ curl -X POST -H 'Content-Type: application/json' -u username:password -d '{"param1": "value1", "param2": "value2"}' https://api.ratemywaseda.com/courses/`
 
 ### Javascript
 To be added
