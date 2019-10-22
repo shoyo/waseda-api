@@ -5,26 +5,7 @@ from rest_framework import serializers
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = [
-            'title',
-            'instructor',
-            'credits',
-            'level',
-            'category',
-            'school',
-            'campus',
-            'main_language',
-            'eligible_year',
-            'course_code',
-            'course_class_code',
-            'syllabus_url',
-            'first_academic_discipline',
-            'second_academic_discipline',
-            'third_academic_discipline',
-            'classroom',
-            'year',
-            'term_day_period',
-        ]
+        fields = '__all__'
     
 
 class CourseReviewSerializer(serializers.ModelSerializer):
@@ -41,6 +22,8 @@ class CourseReviewSerializer(serializers.ModelSerializer):
         read_only=True,
         source='reviewer',
     )
+    datetime_created = serializers.ReadOnlyField()
+    datetime_updated = serializers.ReadOnlyField()
 
     class Meta:
         model = CourseReview
@@ -49,7 +32,9 @@ class CourseReviewSerializer(serializers.ModelSerializer):
                   'text',
                   'anonymous',
                   'course_url',
-                  'reviewer_url',]
+                  'reviewer_url',
+                  'datetime_created',
+                  'datetime_updated',]
 
 
 class LabSerializer(serializers.ModelSerializer):
@@ -72,6 +57,8 @@ class LabReviewSerializer(serializers.ModelSerializer):
         read_only=True,
         source='reviewer',
     )
+    datetime_created = serializers.ReadOnlyField()
+    datetime_updated = serializers.ReadOnlyField()
 
     class Meta:
         model = LabReview
@@ -80,20 +67,22 @@ class LabReviewSerializer(serializers.ModelSerializer):
                   'text',
                   'anonymous',
                   'lab_url',
-                  'reviewer_url',]
+                  'reviewer_url',
+                  'datetime_created',
+                  'datetime_updated',]
 
 
 class UserSerializer(serializers.ModelSerializer):
+    date_joined = serializers.ReadOnlyField()
     password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
         fields = ['id',
                   'username',
-                  'first_name',
-                  'last_name',
                   'email',
                   'year',
+                  'date_joined',
                   'password',]
 
     def create(self, validated_data):
