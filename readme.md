@@ -1,4 +1,5 @@
 # Rate My Waseda API
+[![CircleCI](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api/tree/production.svg?style=shield&circle-token=f6ab685a6862214510891e2fe190379012666e2b)](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api/tree/production)
 
 ## Setting Up
 Note: Python 3.6 is preferred since that's the version that's running on the EC2 instance, but 3.6+ should be fine.
