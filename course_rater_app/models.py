@@ -23,9 +23,9 @@ class Course(models.Model):
 
     syllabus_url = models.URLField()
 
-    first_academic_discipline = models.CharField(max_length=200)
-    second_academic_discipline = models.CharField(max_length=200)
-    third_academic_discipline = models.CharField(max_length=200)
+    first_academic_disciplines = models.CharField(max_length=200)
+    second_academic_disciplines = models.CharField(max_length=200)
+    third_academic_disciplines = models.CharField(max_length=200)
 
     
     # Can change year-to-year
@@ -77,6 +77,16 @@ class LabReview(models.Model):
 
 
 class User(AbstractUser):
+    """A custom User model that extends the built-in AbstractUser model.
+
+    This means that this model also includes the following fields:
+    * username (CharField)
+    * first_name (CharField)
+    * last_name (CharField)
+    * is_staff (BooleanField)
+    * is_active (BooleanField)
+    * date_joined (DateTimeField)
+    """
     GRADE_CHOICES = [('B1', "Bachelor's 1"),
                      ('B2', "Bachelor's 2"),
                      ('B3', "Bachelor's 3"),
