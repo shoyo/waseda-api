@@ -30,6 +30,11 @@ jobs:
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
       - run:
+          name: "Setup environment variables"
+          command: |
+            echo 'export ENVIRONMENT="development"' >> $BASH_ENV
+
+      - run:
           name: run tests
           command: |
             . venv/bin/activate
