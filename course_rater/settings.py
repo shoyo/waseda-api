@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'course_rater_app.apps.CourseRaterAppConfig',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -133,12 +134,22 @@ AUTH_USER_MODEL = 'course_rater_app.User'
 if os.environ['ENVIRONMENT'] == 'development':
     REST_FRAMEWORK = {
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.TokenAuthentication',
+            'rest_framework.authentication.BasicAuthentication',
+        ],
     }
 else:
     REST_FRAMEWORK = {
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-        'DEFAULT_RENDERER_CLASSES': (
+        'DEFAULT_RENDERER_CLASSES': [
             'rest_framework.renderers.JSONRenderer',
-        ),
+        ],
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.TokenAuthentication',
+            'rest_framework.authentication.BasicAuthentication',
+        ],
     }
 
