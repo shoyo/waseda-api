@@ -1,11 +1,13 @@
 import os
 
 from django.urls import path, include
+from rest_framework.authtoken import views as authtoken_views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from course_rater_app import views
 
 urlpatterns = [
+    # Standard Endpoints
     path('', views.api_index),
     path('courses/',
          views.CourseList.as_view(),
@@ -37,8 +39,12 @@ urlpatterns = [
     path('users/<slug:username>/',
          views.UserDetail.as_view(),
          name='user-detail'),
+
+    # Endpoint for obtaining an auth token for Token Authentication
+    path('get-auth-token/', authtoken_views.obtain_auth_token)
 ]
 
+# Adding login to browsable API during development
 if os.environ['ENVIRONMENT'] == 'development':
     urlpatterns += [
         path('api-auth/', include('rest_framework.urls')),
