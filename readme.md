@@ -15,13 +15,13 @@ Note: Python 3.6 is preferred since that's the version that's running on the EC2
 * Run `$ python manage.py runserver` and open `http://localhost:8000`.
 
 ## Development
-During development, run the environment locally and make requests to `http://localhost:8000/`.
+During development, run the environment locally and make requests to `http://localhost:8000`.
 
 ## Testing
 If you make any changes, you can run tests with `$ python manage.py test`. Note that the local server doesn't have to be running for testing to take place.
 
 ## Production
-To interact with endpoints in production, make requests to `https://api.ratemywaseda.com/`.
+To interact with endpoints in production, make requests to `https://api.ratemywaseda.com`.
 
 ## Endpoints
 `users/`
