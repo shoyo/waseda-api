@@ -5,8 +5,9 @@
 Note: Python 3.6 is preferred since that's the version that's running on the EC2 instance, but 3.6+ should be fine.
 * Clone this repo.
 * Create a python virtual environment and run `$ pip install -r requirements.txt` to install dependencies.
-* Add the following line to your `~/.bash_profile`.
+* Add the following lines to your `~/.bash_profile`.
 
+      # Rate My Waseda API environment variables
       export ENVIRONMENT="development"
 
   Update your terminal with this change by running `$ source ~/.bash_profile` or starting a new terminal.
@@ -16,8 +17,11 @@ Note: Python 3.6 is preferred since that's the version that's running on the EC2
 ## Development
 During development, run the environment locally and make requests to `http://localhost:8000/`.
 
+## Testing
+If you make any changes, you can run tests with `$ python manage.py test`. Note that the local server doesn't have to be running for testing to take place.
+
 ## Production
-To test endpoints in production, make requests to `https://api.ratemywaseda.com/`.
+To interact with endpoints in production, make requests to `https://api.ratemywaseda.com/`.
 
 ## Endpoints
 `users/`
