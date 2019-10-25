@@ -1,14 +1,16 @@
-from django.test import TestCase
-from rest_framework.test import APIClient, APIRequestFactory, RequestsClient
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import obtain_auth_token as auth_view
+from rest_framework.test import (APIClient, APIRequestFactory, APITestCase,
+                                 force_authenticate, RequestsClient)
+
 from course_rater_app.fixtures import (courses, course_reviews,
                                        labs, lab_reviews, users)
 from course_rater_app.models import (Course, CourseReview,
                                      Lab, LabReview, User)
 
 
-class TestEndpointResponses(TestCase):
+class TestEndpointResponses(APITestCase):
     def setUp(self):
-        self.factory = APIRequestFactory()
         self.client = APIClient()
 
         for user_args in users:
@@ -32,7 +34,7 @@ class TestEndpointResponses(TestCase):
                          '/users/user1/']:
             response = self.client.get(endpoint)
             error = f'Received status {response.status_code} from "{endpoint}"'
-            assert response.status_code == 200, error
+            self.assertEqual(response.status_code, 200, error)
 
 
     def test_get_reviews_responses(self):
@@ -63,5 +65,24 @@ class TestEndpointResponses(TestCase):
                          '/labs/2/reviews/1/']:
             response = self.client.get(endpoint)
             error = f'Received status {response.status_code} from "{endpoint}"'
-            assert response.status_code == 200, error
+            self.assertEqual(response.status_code, 200, error)
+
+
+class TestAuthentication(APITestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.factory = APIRequestFactory()
+
+        for user_args in users:
+            User.objects.create(**user_args)
+
+
+    def test_get_auth_token(self):
+        """Assert that a valid token for Token Authentication is received."""
+        pass
+
+
+    def test_use_auth_token(self):
+        """Assert that a token can be used to authenticate."""
+        pass
 
