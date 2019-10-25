@@ -1,11 +1,16 @@
 # Rate My Waseda API
+[![CircleCI](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api/tree/production.svg?style=shield&circle-token=f6ab685a6862214510891e2fe190379012666e2b)](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api/tree/production)
+
+## About
+Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **reviews** at Waseda University. It was initially built as a back end API for a course-reviewing app called "Rate My Waseda", but has since been released publicly to help the wider developer community at Waseda. It uses [Django](https://www.djangoproject.com) and the [Django REST Framework](https://www.django-rest-framework.org/).
 
 ## Setting Up
 Note: Python 3.6 is preferred since that's the version that's running on the EC2 instance, but 3.6+ should be fine.
 * Clone this repo.
 * Create a python virtual environment and run `$ pip install -r requirements.txt` to install dependencies.
-* Add the following line to your `~/.bash_profile`.
+* Add the following lines to your `~/.bash_profile`.
 
+      # Rate My Waseda API environment variables
       export ENVIRONMENT="development"
 
   Update your terminal with this change by running `$ source ~/.bash_profile` or starting a new terminal.
@@ -13,10 +18,13 @@ Note: Python 3.6 is preferred since that's the version that's running on the EC2
 * Run `$ python manage.py runserver` and open `http://localhost:8000`.
 
 ## Development
-During development, run the environment locally and make requests to `http://localhost:8000/`.
+During development, run the environment locally and make requests to `http://localhost:8000`.
+
+## Testing
+If you make any changes, you can run tests with `$ python manage.py test`. Note that the local server doesn't have to be running for testing to take place.
 
 ## Production
-To test endpoints in production, make requests to `https://api.ratemywaseda.com/`.
+To interact with endpoints in production, make requests to `https://api.ratemywaseda.com`.
 
 ## Endpoints
 `users/`
@@ -54,3 +62,6 @@ To test endpoints in production, make requests to `https://api.ratemywaseda.com/
 
 ### Javascript
 To be added
+
+## Contact
+The current maintainer of this project is [Shoyo Inokuchi](https://github.com/shoyo-inokuchi). If you have any questions, you can send an email to shoyoinokuchi@gmail.com. If you would like to report a problem, you can [create a new issue](https://github.com/shoyo-inokuchi/rate-my-waseda-api/issues).
