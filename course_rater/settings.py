@@ -17,8 +17,8 @@ if os.environ['ENVIRONMENT'] == 'development':
 else:
     SECRET_KEY = os.environ['SECRET_KEY']
     DEBUG = False
-    ALLOWED_HOSTS = ['rmw-env.qpv9xkzvpn.ap-northeast-1.elasticbeanstalk.com',
-                     'api.ratemywaseda.com']
+    ALLOWED_HOSTS = ['rate-my-waseda-api.qv84dmu98v.ap-northeast-1.elasticbeanstalk.com',
+                     'api.ratemywaseda.com',]
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
 
