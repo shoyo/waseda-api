@@ -19,9 +19,8 @@ else:
     DEBUG = False
     ALLOWED_HOSTS = ['rate-my-waseda-api.qv84dmu98v.ap-northeast-1.elasticbeanstalk.com',
                      'api.ratemywaseda.com',]
-    # Temporary
-    CSRF_COOKIE_SECURE = False
-    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 
 INSTALLED_APPS = [
