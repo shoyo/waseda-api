@@ -74,7 +74,17 @@ if os.environ['ENVIRONMENT'] == 'development':
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'postgres',
             'USER': 'postgres',
-#            'HOST': 'db',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
+    }
+elif os.environ['ENVIRONMENT'] == 'circleci':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': os.environ['DATABASE_URL'],
             'PORT': 5432,
         }
     }

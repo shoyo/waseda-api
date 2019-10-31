@@ -38,7 +38,7 @@ jobs:
       - run:
           name: "Setup environment variables"
           command: |
-            echo 'export ENVIRONMENT="development"' >> $BASH_ENV
+            echo 'export ENVIRONMENT="circleci"' >> $BASH_ENV
 
       - run:
           name: run tests
