@@ -7,36 +7,59 @@ RATING_CHOICES = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
 
 
 class Course(models.Model):
+    """A course model.
+    
+    Some points to remember:
+    * Max number of instructors for a single course is assumed to be 5.
+
+    * Max number of syllabus links for a single course is assumed to be 2.
+
+    * "sessions" is a JSONField, so it can't natively perform model-level
+      validations of the data format. The input for "sessions" should be
+      checked rigorously before creating/updating a Course instance.
+
+      The JSON input of "sessions" should be of the form:
+        "sessions": [
+            {
+                "day": "",
+                "period": "",
+                "classrooms": ["", ""]
+            },
+            {
+                "day": "",
+                "period": "",
+                "classrooms": [""]
+            },
+            ...
+        ]
+
+
+    """
     title = models.CharField(max_length=300)
-    instructor = models.CharField(max_length=300)
-    credits = models.IntegerField()
+    course_class_code = models.CharField(max_length=50)
+    course_code = models.CharField(max_length=50)
     level = models.CharField(max_length=200) # Ex. "Final stage advanced-level undergraduate"
     category = models.CharField(max_length=200) # Ex. "Elective Subjects"
-
+    eligible_year = models.CharField(max_length=100) # Ex. "4th year and above"
+    credits = models.IntegerField()
+    main_language = models.CharField(max_length=100)
     school = models.CharField(max_length=200)
     campus = models.CharField(max_length=200)
-
-    main_language = models.CharField(max_length=100)
-    eligible_year = models.CharField(max_length=100) # Ex. "4th year and above"
-    course_code = models.CharField(max_length=50)
-    course_class_code = models.CharField(max_length=50)
-
-    syllabus_url = models.URLField()
-
-    first_academic_disciplines = models.CharField(max_length=200)
-    second_academic_disciplines = models.CharField(max_length=200)
-    third_academic_disciplines = models.CharField(max_length=200)
-
-    
-    # Can change year-to-year
-    classroom = models.CharField(max_length=200)
     year = models.CharField(max_length=10)
-    # TODO: parse into following
-    term_day_period = models.CharField(max_length=200)
-    term = models.CharField(max_length=100, null=True, blank=True)
-    day = models.CharField(max_length=100, null=True, blank=True)
-    period = models.CharField(max_length=100, null=True, blank=True)
-
+    term = models.CharField(max_length=100)
+    academic_displines = models.ArrayField(
+        models.CharField(max_length=200, blank=True),
+        size=3
+    )
+    instructors = models.ArrayField(
+        models.CharField(max_length=300, blank=True),
+        size=5
+    )
+    syllabus_urls = models.ArrayField(
+        models.URLField(blank=True),
+        size=2
+    )
+    sessions = models.JSONField() # NOTE: READ THE DOCSTRING
 
 
 class CourseReview(models.Model):
