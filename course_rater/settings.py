@@ -8,7 +8,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-if os.environ['ENVIRONMENT'] == 'development':
+if os.environ['ENVIRONMENT'] in ['development', 'circleci']:
     SECRET_KEY = 'notasecretkey'
     DEBUG = True
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -144,7 +144,7 @@ AUTH_USER_MODEL = 'course_rater_app.User'
 
 # Rest Framework
 
-if os.environ['ENVIRONMENT'] == 'development':
+if os.environ['ENVIRONMENT'] in ['development', 'circleci']:
     REST_FRAMEWORK = {
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
         'DEFAULT_AUTHENTICATION_CLASSES': [
