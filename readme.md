@@ -6,7 +6,7 @@ Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **r
 
 ## Setting Up
 Note: Python 3.6 is preferred since that's the version that's running on the EC2 instance, but 3.6+ should be fine.
-* Clone this repo.
+* Clone this repository.
 * Create a python virtual environment and run `$ pip install -r requirements.txt` to install dependencies.
 * Add the following lines to your `~/.bash_profile`.
 
@@ -21,7 +21,11 @@ Note: Python 3.6 is preferred since that's the version that's running on the EC2
 During development, run the environment locally and make requests to `http://localhost:8000`.
 
 ## Testing
-If you make any changes, you can run tests with `$ python manage.py test`. Note that the local server doesn't have to be running for testing to take place.
+Since the database schema uses Postgres-specific fields, a local Postgres database needs to be spun up instead of simply using SQLite. Docker is used to conveniently perform the necessary setup to run tests locally.  
+* Run the [Docker](https://www.docker.com/products/docker-desktop) daemon locally.
+* **(First time only)** Run `docker-compose -f docker-compose.test.yml build` to build the image. This takes a few minutes.
+* Run `docker-compose -f docker-compose.test.yml up` to spin up the environment and run tests. Test results will be displayed.
+* Run **Control + C** and/or `docker-compose -f docker-compose.test.yml down` to clean up.
 
 ## Production
 To interact with endpoints in production, make requests to `https://api.ratemywaseda.com`.

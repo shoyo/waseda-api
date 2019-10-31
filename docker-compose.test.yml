@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.5
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    command: python manage.py test
+    environment:
+      ENVIRONMENT: 'development'
+    volumes:
+      - .:/api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

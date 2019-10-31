@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.contrib.postgres import fields as postgres_fields
 from django.db import models
 
 
@@ -10,9 +11,9 @@ class Course(models.Model):
     """A course model.
     
     Some points to remember:
-    * Max number of instructors for a single course is assumed to be 5.
+    * Max number of instructors for a single course is assumed to be 30.
 
-    * Max number of syllabus links for a single course is assumed to be 2.
+    * Max number of syllabus links for a single course is assumed to be 5.
 
     * "sessions" is a JSONField, so it can't natively perform model-level
       validations of the data format. The input for "sessions" should be
@@ -35,31 +36,31 @@ class Course(models.Model):
 
 
     """
-    title = models.CharField(max_length=300)
-    course_class_code = models.CharField(max_length=50)
-    course_code = models.CharField(max_length=50)
+    title = models.CharField(max_length=200)
+    course_class_code = models.CharField(max_length=20)
+    course_code = models.CharField(max_length=20)
     level = models.CharField(max_length=200) # Ex. "Final stage advanced-level undergraduate"
-    category = models.CharField(max_length=200) # Ex. "Elective Subjects"
-    eligible_year = models.CharField(max_length=100) # Ex. "4th year and above"
+    category = models.CharField(max_length=60) # Ex. "Elective Subjects"
+    eligible_year = models.CharField(max_length=30) # Ex. "4th year and above"
     credits = models.IntegerField()
-    main_language = models.CharField(max_length=100)
-    school = models.CharField(max_length=200)
-    campus = models.CharField(max_length=200)
+    main_language = models.CharField(max_length=50)
+    school = models.CharField(max_length=100)
+    campus = models.CharField(max_length=100)
     year = models.CharField(max_length=10)
     term = models.CharField(max_length=100)
-    academic_displines = models.ArrayField(
-        models.CharField(max_length=200, blank=True),
+    academic_displines = postgres_fields.ArrayField(
+        models.CharField(max_length=100, blank=True),
         size=3
     )
-    instructors = models.ArrayField(
-        models.CharField(max_length=300, blank=True),
+    instructors = postgres_fields.ArrayField(
+        models.CharField(max_length=100, blank=True),
+        size=30
+    )
+    syllabus_urls = postgres_fields.ArrayField(
+        models.URLField(blank=True),
         size=5
     )
-    syllabus_urls = models.ArrayField(
-        models.URLField(blank=True),
-        size=2
-    )
-    sessions = models.JSONField() # NOTE: READ THE DOCSTRING
+    sessions = postgres_fields.JSONField() # NOTE: READ THE DOCSTRING
 
 
 class CourseReview(models.Model):
