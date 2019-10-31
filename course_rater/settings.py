@@ -71,8 +71,11 @@ WSGI_APPLICATION = 'course_rater.wsgi.application'
 if os.environ['ENVIRONMENT'] == 'development':
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
         }
     }
 else:
@@ -137,7 +140,6 @@ if os.environ['ENVIRONMENT'] == 'development':
         'DEFAULT_AUTHENTICATION_CLASSES': [
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.TokenAuthentication',
-            'rest_framework.authentication.BasicAuthentication',
         ],
     }
 else:
@@ -149,7 +151,5 @@ else:
         'DEFAULT_AUTHENTICATION_CLASSES': [
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.TokenAuthentication',
-            'rest_framework.authentication.BasicAuthentication',
         ],
     }
-
