@@ -10,11 +10,7 @@ RATING_CHOICES = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
 class Course(models.Model):
     """A course model.
     
-    Some points to remember:
-    * Max number of instructors for a single course is assumed to be 30.
-
-    * Max number of syllabus links for a single course is assumed to be 5.
-
+    Note:
     * "sessions" is a JSONField, so it can't natively perform model-level
       validations of the data format. The input for "sessions" should be
       checked rigorously before creating/updating a Course instance.
@@ -59,6 +55,10 @@ class Course(models.Model):
     syllabus_urls = postgres_fields.ArrayField(
         models.URLField(blank=True),
         size=5
+    )
+    classrooms = postgres_fields.ArrayField(
+        models.CharField(max_length=20, blank=True),
+        size=3
     )
     sessions = postgres_fields.JSONField() # NOTE: READ THE DOCSTRING
 
