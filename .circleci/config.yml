@@ -4,6 +4,12 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.8
+        environment:
+          DATABASE_URL: postgresql://postgres@localhost/db?sslmode=disable
+      - image: circleci/postgres:11.5
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: db
 
     working_directory: ~/rate-my-waseda-api
 
@@ -32,7 +38,7 @@ jobs:
       - run:
           name: "Setup environment variables"
           command: |
-            echo 'export ENVIRONMENT="development"' >> $BASH_ENV
+            echo 'export ENVIRONMENT="circleci"' >> $BASH_ENV
 
       - run:
           name: run tests
