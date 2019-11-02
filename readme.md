@@ -4,33 +4,8 @@
 ## About
 Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **reviews** at Waseda University. It was initially built as a back end API for a course-reviewing app called "Rate My Waseda", but has since been released publicly to help the wider developer community at Waseda. It uses [Django](https://www.djangoproject.com) and the [Django REST Framework](https://www.django-rest-framework.org/).
 
-## Setting Up
-Note: Python 3.6 is preferred since that's the version that's running on the EC2 instance, but 3.6+ should be fine.
-* Clone this repository.
-* Create a python virtual environment and run `$ pip install -r requirements.txt` to install dependencies.
-* Add the following lines to your `~/.bash_profile`.
-
-      # Rate My Waseda API environment variables
-      export ENVIRONMENT="development"
-
-  Update your terminal with this change by running `$ source ~/.bash_profile` or starting a new terminal.
-* Run database migrations with `$ python manage.py migrate`.
-* Run `$ python manage.py runserver` and open `http://localhost:8000`.
-
-## Development
-During development, run the environment locally and make requests to `http://localhost:8000`.
-
-## Testing
-Since the database schema uses Postgres-specific fields, a local Postgres database needs to be spun up instead of simply using SQLite. Docker is used to conveniently perform the necessary setup to run tests locally.  
-* Run the [Docker](https://www.docker.com/products/docker-desktop) daemon locally.
-* **(First time only)** Run `docker-compose -f docker-compose.test.yml build` to build the image. This takes a few minutes.
-* Run `docker-compose -f docker-compose.test.yml up` to spin up the environment and run tests. Test results will be displayed.
-* Run **Control + C** and/or `docker-compose -f docker-compose.test.yml down` to clean up.
-
-## Production
-To interact with endpoints in production, make requests to `https://api.ratemywaseda.com`.
-
-## Endpoints
+## How to use
+### Endpoints
 `users/`
 * `GET`: show all users
 * `POST`: create new user
@@ -58,14 +33,32 @@ To interact with endpoints in production, make requests to `https://api.ratemywa
 * `PUT`: update course review or lab review **[must provide admin credentials]**
 * `DELETE`: delete course review or lab review **[must provide admin credentials]**
 
-## Examples
-### cURL
-* `$ curl -X GET https://api.ratemywaseda.com/courses/`
-* `$ curl -X POST -u username:password -d "param1=value1&param2=value2" https://api.ratemywaseda.com/courses/`
-* `$ curl -X POST -H 'Content-Type: application/json' -u username:password -d '{"param1": "value1", "param2": "value2"}' https://api.ratemywaseda.com/courses/`
+`get-auth-token/`
+* `POST`: obtain an API authorization token
 
-### Javascript
+### Examples
+#### cURL
+* `$ curl -X GET https://api.ratemywaseda.com/courses/`
+
+#### Python
 To be added
+
+#### Javascript
+To be added
+
+## Development
+Docker is used to install Python 3.6.8, install dependencies, and spin up a local Postgres database.
+### Setting up
+* Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and run the daemon.
+* Run `$ docker-compose build` to build the image. This takes a few minutes.
+
+### Developing
+* Run `$ docker-compose up` to spin up containers and open `localhost:8000` to access the web interface.
+* Run `$ docker-compose down` to clean up.
+
+### Testing
+* Run `$ docker-compose run api python manage.py test` to run tests. Test results will be displayed.
+* **Note**: Always run `$ docker-compose down` afterwards to clean up.
 
 ## Contact
 The current maintainer of this project is [Shoyo Inokuchi](https://github.com/shoyo-inokuchi). If you have any questions, you can send an email to shoyoinokuchi@gmail.com. If you would like to report a problem, you can [create a new issue](https://github.com/shoyo-inokuchi/rate-my-waseda-api/issues).
