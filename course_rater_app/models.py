@@ -1,42 +1,73 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.contrib.postgres import fields as postgres_fields
 from django.db import models
+
+from .validators import validate_session
 
 
 RATING_CHOICES = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
 
 
 class Course(models.Model):
-    title = models.CharField(max_length=300)
-    instructor = models.CharField(max_length=300)
-    credits = models.IntegerField()
-    level = models.CharField(max_length=200) # Ex. "Final stage advanced-level undergraduate"
-    category = models.CharField(max_length=200) # Ex. "Elective Subjects"
-
-    school = models.CharField(max_length=200)
-    campus = models.CharField(max_length=200)
-
-    main_language = models.CharField(max_length=100)
-    eligible_year = models.CharField(max_length=100) # Ex. "4th year and above"
-    course_code = models.CharField(max_length=50)
-    course_class_code = models.CharField(max_length=50)
-
-    syllabus_url = models.URLField()
-
-    first_academic_disciplines = models.CharField(max_length=200)
-    second_academic_disciplines = models.CharField(max_length=200)
-    third_academic_disciplines = models.CharField(max_length=200)
-
+    """A course model.
     
-    # Can change year-to-year
-    classroom = models.CharField(max_length=200)
-    year = models.CharField(max_length=10)
-    # TODO: parse into following
-    term_day_period = models.CharField(max_length=200)
-    term = models.CharField(max_length=100, null=True, blank=True)
-    day = models.CharField(max_length=100, null=True, blank=True)
-    period = models.CharField(max_length=100, null=True, blank=True)
+    Note:
+    * "sessions" contains JSONField, so it can't natively perform model-level
+      validations of the data format. The input for "sessions" should be
+      checked rigorously before creating/updating a Course instance.
 
+      The input of "sessions" should be of the form:
+        "sessions": [
+            {
+                "day": "",
+                "period": "",
+            },
+            {
+                "day": "",
+                "period": "",
+            },
+            ...
+        ]
+
+
+    """
+    title = models.CharField(max_length=150)
+    course_class_code = models.CharField(max_length=20)
+    course_code = models.CharField(max_length=10)
+    level = models.CharField(max_length=100) # Ex. "Final stage advanced-level undergraduate"
+    category = models.CharField(max_length=100) # Ex. "Elective Subjects"
+    eligible_year = models.CharField(max_length=50) # Ex. "4th year and above"
+    credits = models.IntegerField()
+    main_language = models.CharField(max_length=50)
+    school = models.CharField(max_length=100)
+    campus = models.CharField(max_length=50)
+    year = models.CharField(max_length=10)
+    term = models.CharField(max_length=50)
+    academic_disciplines = postgres_fields.ArrayField(
+        models.CharField(max_length=100, blank=True),
+        size=3,
+    )
+    instructors = postgres_fields.ArrayField(
+        models.CharField(max_length=100, blank=True),
+        size=43,
+    )
+    syllabus_urls = postgres_fields.ArrayField(
+        models.URLField(blank=True),
+        size=5
+    )
+    classrooms = postgres_fields.ArrayField(
+        models.CharField(max_length=20, blank=True),
+        size=3,
+    )
+    sessions = postgres_fields.ArrayField(
+        postgres_fields.ArrayField(
+            models.CharField(max_length=20),
+            size=2,
+            validators=[validate_session]
+        ),
+        size=3,
+    )
 
 
 class CourseReview(models.Model):
@@ -63,14 +94,18 @@ class Lab(models.Model):
 
 
 class LabReview(models.Model):
+    # Relationships
     lab = models.ForeignKey('Lab', on_delete=models.CASCADE)
     reviewer = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  db_column='user_id',
                                  on_delete=models.CASCADE)
 
+    # User reviews
     overall_rating = models.IntegerField(choices=RATING_CHOICES)
     text = models.CharField(max_length=5000)
+    anonymous = models.BooleanField(default=False)
 
+    # Metadata
     anonymous = models.BooleanField(default=False)
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_updated = models.DateTimeField(auto_now=True)
