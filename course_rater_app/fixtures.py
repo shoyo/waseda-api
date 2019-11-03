@@ -47,11 +47,17 @@ courses = [
         "syllabus_urls": [
             "https://www.wsl.waseda.jp/syllabus/JAA104.php?pLng=en&pKey=2603034015012019260702401326"
         ],
-        "classrooms": [
-            "54-204"
-        ],
         "sessions": [
-            ["Friday", "2"]
+            {
+                "day": "Friday",
+                "period": "2",
+                "classrooms": ["53-102"]
+            },
+            {
+                "day": "Friday",
+                "period": "2",
+                "classrooms": ["55-102", "22-123"]
+            }
         ]
     },
     {
@@ -78,11 +84,12 @@ courses = [
         "syllabus_urls": [
             "https://www.wsl.waseda.jp/syllabus/JAA104.php?pLng=en&pKey=qwerty"
         ],
-        "classrooms": [
-            "52-101"
-        ],
         "sessions": [
-            ["Wednesday", "6"]
+            {
+                "day": "Friday",
+                "period": "2",
+                "classrooms": ["53-102"]
+            }
         ]
     }
 ]

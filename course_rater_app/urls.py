@@ -41,7 +41,7 @@ urlpatterns = [
          name='user-detail'),
 
     # Endpoint for obtaining an auth token for Token Authentication
-    path('get-auth-token/', authtoken_views.obtain_auth_token)
+    path('api-auth-token/', authtoken_views.obtain_auth_token)
 ]
 
 # Adding login to browsable API during development

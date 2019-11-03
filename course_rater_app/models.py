@@ -13,7 +13,7 @@ class Course(models.Model):
     """A course model.
     
     Note:
-    * "sessions" contains JSONField, so it can't natively perform model-level
+    * "sessions" is a JSONField, so it can't natively perform model-level
       validations of the data format. The input for "sessions" should be
       checked rigorously before creating/updating a Course instance.
 
@@ -22,10 +22,12 @@ class Course(models.Model):
             {
                 "day": "",
                 "period": "",
+                "classrooms": ["", ""]
             },
             {
                 "day": "",
                 "period": "",
+                "classrooms": [""]
             },
             ...
         ]
@@ -56,18 +58,7 @@ class Course(models.Model):
         models.URLField(blank=True),
         size=5
     )
-    classrooms = postgres_fields.ArrayField(
-        models.CharField(max_length=20, blank=True),
-        size=3,
-    )
-    sessions = postgres_fields.ArrayField(
-        postgres_fields.ArrayField(
-            models.CharField(max_length=20),
-            size=2,
-            validators=[validate_session]
-        ),
-        size=3,
-    )
+    sessions = postgres_fields.JSONField()
 
 
 class CourseReview(models.Model):

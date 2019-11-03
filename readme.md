@@ -1,5 +1,5 @@
 # Rate My Waseda API
-[![CircleCI](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api/tree/production.svg?style=shield&circle-token=f6ab685a6862214510891e2fe190379012666e2b)](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api/tree/production)
+[![CircleCI](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api.svg?style=shield&circle-token=f6ab685a6862214510891e2fe190379012666e2b)](https://circleci.com/gh/shoyo-inokuchi/rate-my-waseda-api)
 
 ## About
 Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **reviews** at Waseda University. It was initially built as a back end API for a course-reviewing app called "Rate My Waseda", but has since been released publicly to help the wider developer community at Waseda. It uses [Django](https://www.djangoproject.com) and the [Django REST Framework](https://www.django-rest-framework.org/).
@@ -33,7 +33,7 @@ Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **r
 * `PUT`: update course review or lab review **[must provide admin credentials]**
 * `DELETE`: delete course review or lab review **[must provide admin credentials]**
 
-`get-auth-token/`
+`api-auth-token/`
 * `POST`: obtain an API authorization token
 
 ### Examples
