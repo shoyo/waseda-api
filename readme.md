@@ -33,7 +33,7 @@ Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **r
 * `PUT`: update course review or lab review **[must provide admin credentials]**
 * `DELETE`: delete course review or lab review **[must provide admin credentials]**
 
-`get-auth-token/`
+`api-auth-token/`
 * `POST`: obtain an API authorization token
 
 ### Examples
