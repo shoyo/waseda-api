@@ -45,7 +45,7 @@ class Course(models.Model):
     school = models.CharField(max_length=100)
     campus = models.CharField(max_length=50, blank=True)
     year = models.CharField(max_length=10)
-    term = models.CharField(max_length=50)
+    term = models.CharField(max_length=50, blank=True)
     academic_disciplines = postgres_fields.ArrayField(
         models.CharField(max_length=100, blank=True),
         size=3,
