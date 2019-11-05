@@ -16,6 +16,15 @@ class IsReviewerOrAdminOrReadOnly(permissions.BasePermission):
             return obj.reviewer == request.user or request.user.is_staff
 
 
+class IsAdmin(permissions.BasePermission):
+    """Allow Admin to perform all methods.
+
+    Used to prevent any non-admin from interacting with an endpoint.
+    """
+    def has_permission(self, request, view):
+        return request.user.is_staff
+
+
 class IsAdminOrReadOnly(permissions.BasePermission):
     """Allow Admin to read/update/delete.
 

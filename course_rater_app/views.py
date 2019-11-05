@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from course_rater_app.models import Course, CourseReview, Lab, LabReview, User
-from course_rater_app.permissions import IsAdminOrReadOnly
+from course_rater_app.permissions import IsAdmin, IsAdminOrReadOnly
 from course_rater_app.serializers import (CourseSerializer,
                                           CourseReviewSerializer,
                                           LabSerializer,
@@ -17,7 +17,6 @@ from course_rater_app.serializers import (CourseSerializer,
 def api_index(request, format=None):
     """Handle requests to index page."""
     return Response({
-        'users': reverse('user-list', request=request, format=format),
         'labs': reverse('lab-list', request=request, format=format),
         'courses': reverse('course-list', request=request, format=format),
     })
@@ -103,13 +102,13 @@ class UserList(generics.ListCreateAPIView):
     """Handle requests to 'users/'."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAdmin]
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     """Handle requests to 'users/<int:pk>/'."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdmin]
     lookup_field = 'username'
 
