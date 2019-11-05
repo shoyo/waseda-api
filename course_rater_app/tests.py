@@ -213,6 +213,7 @@ class TestCoursesPOST(APITestCase):
         - category
         - course_code
         - level
+        - term
         """
         valid_course_data = {
             "title": "Test Course",
@@ -222,7 +223,6 @@ class TestCoursesPOST(APITestCase):
             "main_language": "English",
             "school": "Fundamental Science and Engineering",
             "year": "2020",
-            "term": "Fall",
             "instructors": [
                 "professor A",
                 "professor B",
