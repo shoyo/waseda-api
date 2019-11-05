@@ -36,19 +36,21 @@ class Course(models.Model):
     """
     title = models.CharField(max_length=150)
     course_class_code = models.CharField(max_length=20)
-    course_code = models.CharField(max_length=10)
-    level = models.CharField(max_length=100) # Ex. "Final stage advanced-level undergraduate"
-    category = models.CharField(max_length=100) # Ex. "Elective Subjects"
+    course_code = models.CharField(max_length=10, blank=True)
+    level = models.CharField(max_length=100, blank=True) # Ex. "Final stage advanced-level undergraduate"
+    category = models.CharField(max_length=100, blank=True) # Ex. "Elective Subjects"
     eligible_year = models.CharField(max_length=50) # Ex. "4th year and above"
     credits = models.IntegerField()
     main_language = models.CharField(max_length=50)
     school = models.CharField(max_length=100)
-    campus = models.CharField(max_length=50)
+    campus = models.CharField(max_length=50, blank=True)
     year = models.CharField(max_length=10)
     term = models.CharField(max_length=50)
     academic_disciplines = postgres_fields.ArrayField(
         models.CharField(max_length=100, blank=True),
         size=3,
+        blank=True,
+        null=True
     )
     instructors = postgres_fields.ArrayField(
         models.CharField(max_length=100, blank=True),
