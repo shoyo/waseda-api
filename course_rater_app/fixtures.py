@@ -3,18 +3,21 @@ import json
 
 users = [
     {
+        "id": 1,
         "username": "user1",
         "email": "user1@example.com",
         "password": "password1",
         "year": "B1"
     },
     {
+        "id": 2,
         "username": "user2",
         "email": "user2@example.com",
         "password": "password2",
         "year": "B2"
     },
     {
+        "id": 3,
         "username": "admin",
         "email": "admin@example.com",
         "password": "password",
@@ -98,11 +101,13 @@ courses = [
 
 labs = [
     {
+        "id": 1,
         "professor": "Professor 1",
         "topic": "Topic 1",
         "website": "https://topic1.example.com",
     },
     {
+        "id": 2,
         "professor": "Professor 2",
         "topic": "Topic 2",
         "website": "https://topic2.example.com",
