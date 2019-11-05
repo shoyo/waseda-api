@@ -167,3 +167,14 @@ else:
             'rest_framework.authentication.TokenAuthentication',
         ],
     }
+
+
+# Sentry
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    # dsn=os.environ['SENTRY_DSN'],
+    dsn="https://7f14f08bf012485caabf82396d0386a6@sentry.io/1807883",
+    integrations=[DjangoIntegration()]
+)

@@ -48,5 +48,6 @@ urlpatterns = [
 if os.environ['ENVIRONMENT'] == 'development':
     urlpatterns += [
         path('api-auth/', include('rest_framework.urls')),
+        path('sentry-debug/', lambda request: 1 / 0)
     ]
 
