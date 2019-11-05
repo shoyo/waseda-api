@@ -24,6 +24,7 @@ users = [
 
 courses = [
     {
+        "id": 1,
         "title": "Advanced Image Information",
         "course_class_code": "01",
         "course_code": "INFE41ZL",
@@ -61,6 +62,7 @@ courses = [
         ]
     },
     {
+        "id": 2,
         "title": "Signal Processing",
         "course_class_code": "01",
         "course_code": "ABCDE",

@@ -21,7 +21,6 @@ class TestEndpointResponses(APITestCase):
         for lab_args in labs:
             Lab.objects.create(**lab_args)
 
-
     def test_get_responses(self):
         """Assert GET requests to endpoints return 200 OK."""
         for endpoint in ['',
@@ -204,4 +203,52 @@ class TestCoursesPOST(APITestCase):
         # TODO: validate that sessions JSON field is formatted correctly
         for field in ["syllabus_urls"]:
             self.assertTrue(field in response.data, response.data)
+
+
+    def test_allow_some_missing_fields(self):
+        """Assert that the fields listed below are allowed to be blank:
+
+        - academic_disciplines
+        - campus
+        - category
+        - course_code
+        - level
+        """
+        valid_course_data = {
+            "title": "Test Course",
+            "course_class_code": "12345",
+            "eligible_year": "2nd year and above",
+            "credits": 2,
+            "main_language": "English",
+            "school": "Fundamental Science and Engineering",
+            "year": "2020",
+            "term": "Fall",
+            "instructors": [
+                "professor A",
+                "professor B",
+                "professor C"
+            ],
+            "syllabus_urls": [
+                "https://example.com/a",
+                "https://example.com/b",
+                "https://example.com/c"
+            ],
+            "sessions": [
+                {
+                    "day": "Tuesday",
+                    "period": "2",
+                    "classrooms": ["53-102"]
+                },
+                {
+                    "day": "Friday",
+                    "period": "2",
+                    "classrooms": ["55-102", "22-123"]
+                }
+            ]
+        }
+        response = self.client.post('/courses/',
+                                    valid_course_data,
+                                    format='json',
+                                    HTTP_AUTHORIZATION=f'Token {self.token}')
+        self.assertEqual(response.status_code, 201, response.data)
 
