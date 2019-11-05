@@ -29,9 +29,7 @@ class TestEndpointResponses(APITestCase):
                          '/courses/2/reviews/',
                          '/labs/',
                          '/labs/2/',
-                         '/labs/2/reviews/',
-                         '/users/',
-                         '/users/user1/']:
+                         '/labs/2/reviews/']:
             response = self.client.get(endpoint)
             error = f'Received status {response.status_code} from "{endpoint}"'
             self.assertEqual(response.status_code, 200, error)
@@ -44,11 +42,9 @@ class TestEndpointResponses(APITestCase):
         A User object and Course object must exist before a CourseReview object
         can be created.
         """
-        # Course and Lab are queried oddly with 'filter()[0]' instead of 'get()'
-        # due to buggy automatic primary keys on Docker + Postgres setup
-        course = Course.objects.filter(title='Signal Processing')[0]
-        lab = Lab.objects.filter(professor='Professor 2')[0]
-        user = User.objects.get(username='user1')
+        course = Course.objects.get(pk=2)
+        lab = Lab.objects.get(pk=2)
+        user = User.objects.get(pk=1)
 
         CourseReview.objects.create(
             overall_rating = 3,
@@ -68,6 +64,29 @@ class TestEndpointResponses(APITestCase):
             response = self.client.get(endpoint)
             error = f'Received status {response.status_code} from "{endpoint}"'
             self.assertEqual(response.status_code, 200, error)
+
+
+    def test_get_users_response(self):
+        """Assert that non-admin cannot GET the /users/ endpoint."""
+        username = User.objects.get(pk=2).username
+        for endpoint in ['/users/',
+                         f'/users/{username}/']:
+            response = self.client.get(endpoint)
+            self.assertEqual(response.status_code, 403)
+
+
+    def test_get_admin_users_response(self):
+        """Assert that admin can GET the /users/ endpoint."""
+        admin = User.objects.get(pk=3)
+        assert admin.is_staff
+        token = Token.objects.create(user=admin)
+
+        username = User.objects.get(pk=2).username
+        for endpoint in ['/users/',
+                         f'/users/{username}/']:
+            response = self.client.get(endpoint,
+                                       HTTP_AUTHORIZATION=f'Token {token}')
+            self.assertEqual(response.status_code, 200, response.data)
 
 
 class TestCoursesPOST(APITestCase):
