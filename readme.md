@@ -6,15 +6,6 @@ Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **r
 
 ## How to use
 ### Endpoints
-`users/`
-* `GET`: show all users
-* `POST`: create new user
-
-`users/<slug:username>/`
-* `GET`: show user
-* `PUT`: update user **[admin]**
-* `DELETE`: delete user **[admin]**
-
 `courses/` and `labs/`
 * `GET`: show all courses or labs
 * `POST`: create new course or lab **[admin]**
@@ -32,6 +23,15 @@ Rate My Waseda API is a RESTful web interface for **courses**, **labs**, and **r
 * `GET`: show course review or lab review
 * `PUT`: update course review or lab review **[admin]**
 * `DELETE`: delete course review or lab review **[admin]**
+
+`users/`
+* `GET`: show all users **[admin]**
+* `POST`: create new user **[admin]**
+
+`users/<slug:username>/`
+* `GET`: show user **[admin]**
+* `PUT`: update user **[admin]**
+* `DELETE`: delete user **[admin]**
 
 `api-auth-token/`
 * `POST`: obtain an API authorization token
