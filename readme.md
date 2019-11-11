@@ -55,7 +55,7 @@ Course:
         "academic_disciplines": [
              str, 
              str, 
-            str, 
+             str, 
         ],
         "instructors": [
             str,
