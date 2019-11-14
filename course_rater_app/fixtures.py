@@ -36,10 +36,10 @@ courses = [
         "eligible_year": "4th year and above",
         "credits": 2,
         "main_language": "English",
-        "school": "School of Fundamental Science and Engineering",
         "campus": "Nishi-Waseda\uff08Former: Okubo\uff09",
         "year": "2019\u00a0",
         "term": "spring semester",
+        "syllabus_url": "https://www.wsl.waseda.jp/syllabus/JAA104.php?pLng=en&pKey=2603034015012019260702401326",
         "academic_disciplines": [
             "Informatics",
             "Graphics and Visualization",
@@ -48,8 +48,10 @@ courses = [
         "instructors": [
             "KATTO, Jiro"
         ],
-        "syllabus_urls": [
-            "https://www.wsl.waseda.jp/syllabus/JAA104.php?pLng=en&pKey=2603034015012019260702401326"
+        "schools": [
+            "School of Fundamental Science and Engineering",
+            "School of Advanced Science and Engineering",
+            "School fo Creative Science and Engineering"
         ],
         "sessions": [
             {
@@ -74,10 +76,10 @@ courses = [
         "eligible_year": "3rd year and above",
         "credits": 2,
         "main_language": "English",
-        "school": "School of Fundamental Science and Engineering",
         "campus": "Nishi-Waseda\uff08Former: Okubo\uff09",
         "year": "2019\u00a0",
         "term": "spring semester",
+        "syllabus_url": "https://www.wsl.waseda.jp/syllabus/JAA104.php?pLng=en&pKey=qwerty",
         "academic_disciplines": [
             "Communications",
             "Informatics",
@@ -86,8 +88,10 @@ courses = [
         "instructors": [
             "Professor A"
         ],
-        "syllabus_urls": [
-            "https://www.wsl.waseda.jp/syllabus/JAA104.php?pLng=en&pKey=qwerty"
+        "schools": [
+            "School of Fundamental Science and Engineering",
+            "School of Advanced Science and Engineering",
+            "School fo Creative Science and Engineering"
         ],
         "sessions": [
             {
@@ -113,4 +117,3 @@ labs = [
         "website": "https://topic2.example.com",
     },
 ]
-

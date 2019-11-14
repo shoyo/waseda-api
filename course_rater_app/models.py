@@ -11,7 +11,7 @@ RATING_CHOICES = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
 
 class Course(models.Model):
     """A course model.
-    
+
     Note:
     * "sessions" is a JSONField, so it can't natively perform model-level
       validations of the data format. The input for "sessions" should be
@@ -42,10 +42,16 @@ class Course(models.Model):
     eligible_year = models.CharField(max_length=50) # Ex. "4th year and above"
     credits = models.IntegerField()
     main_language = models.CharField(max_length=50)
-    school = models.CharField(max_length=100)
     campus = models.CharField(max_length=50, blank=True)
     year = models.CharField(max_length=10)
     term = models.CharField(max_length=50, blank=True)
+    syllabus_url = models.URLField(blank=True)
+    schools = postgres_fields.ArrayField(
+        models.CharField(max_length=70),
+        size=3,
+        blank=True,
+        null=True
+    )
     academic_disciplines = postgres_fields.ArrayField(
         models.CharField(max_length=100, blank=True),
         size=3,
@@ -55,10 +61,6 @@ class Course(models.Model):
     instructors = postgres_fields.ArrayField(
         models.CharField(max_length=100, blank=True),
         size=43,
-    )
-    syllabus_urls = postgres_fields.ArrayField(
-        models.URLField(blank=True),
-        size=5
     )
     sessions = postgres_fields.JSONField()
 
@@ -127,5 +129,3 @@ class User(AbstractUser):
 
     email = models.EmailField(unique=True)
     year = models.CharField(max_length=2, choices=GRADE_CHOICES, default='B1')
-
-

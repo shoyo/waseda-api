@@ -112,10 +112,10 @@ class TestCoursesPOST(APITestCase):
             "eligible_year": "2nd year and above",
             "credits": 2,
             "main_language": "English",
-            "school": "Fundamental Science and Engineering",
             "campus": "Nishi-Waseda Campus",
             "year": "2020",
             "term": "Fall",
+            "syllabus_url": "https://example.com/a",
             "academic_disciplines": [
                 "discipline A",
                 "discipline B",
@@ -126,10 +126,10 @@ class TestCoursesPOST(APITestCase):
                 "professor B",
                 "professor C"
             ],
-            "syllabus_urls": [
-                "https://example.com/a",
-                "https://example.com/b",
-                "https://example.com/c"
+            "schools": [
+                "School of Fundamental Science and Engineering",
+                "School of Advanced Science and Engineering",
+                "School fo Creative Science and Engineering"
             ],
             "sessions": [
                 {
@@ -168,7 +168,7 @@ class TestCoursesPOST(APITestCase):
 
     def test_invalid_format(self):
         """Assert that schema is validated properly.
-        
+
         Note: Currently the `sessions` field is a JSON field that is not
         rigorously validated.
         """
@@ -181,10 +181,10 @@ class TestCoursesPOST(APITestCase):
             "eligible_year": "2nd year and above",
             "credits": 2,
             "main_language": "English",
-            "school": "Fundamental Science and Engineering",
             "campus": "Nishi-Waseda Campus",
             "year": "2020",
             "term": "Fall",
+            "syllabus_url": "not a url", # invalid string format
             "academic_disciplines": [
                 "discipline A",
                 "discipline B",
@@ -195,10 +195,10 @@ class TestCoursesPOST(APITestCase):
                 "professor B",
                 "professor C"
             ],
-            "syllabus_urls": [
-                "https://example.com/a",
-                "https://example.com/b",
-                "not a url" # invalid string format
+            "schools": [
+                "School of Fundamental Science and Engineering",
+                "School of Advanced Science and Engineering",
+                "School fo Creative Science and Engineering"
             ],
             "sessions": [
                 {
@@ -220,7 +220,7 @@ class TestCoursesPOST(APITestCase):
         self.assertEqual(response.status_code, 400)
 
         # TODO: validate that sessions JSON field is formatted correctly
-        for field in ["syllabus_urls"]:
+        for field in ["syllabus_url"]:
             self.assertTrue(field in response.data, response.data)
 
 
@@ -240,17 +240,15 @@ class TestCoursesPOST(APITestCase):
             "eligible_year": "2nd year and above",
             "credits": 2,
             "main_language": "English",
-            "school": "Fundamental Science and Engineering",
+            "syllabus_urls": "https://example.com/a",
+            "schools": [
+                "Fundamental Science and Engineering",
+            ],
             "year": "2020",
             "instructors": [
                 "professor A",
                 "professor B",
                 "professor C"
-            ],
-            "syllabus_urls": [
-                "https://example.com/a",
-                "https://example.com/b",
-                "https://example.com/c"
             ],
             "sessions": [
                 {
@@ -270,4 +268,3 @@ class TestCoursesPOST(APITestCase):
                                     format='json',
                                     HTTP_AUTHORIZATION=f'Token {self.token}')
         self.assertEqual(response.status_code, 201, response.data)
-
