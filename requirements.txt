@@ -1,4 +1,4 @@
-django==2.1.12
+django==2.2.24
 djangorestframework==3.10.3
 django-cors-headers==3.1.1
 dj-database-url==0.5.0
